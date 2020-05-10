@@ -1,0 +1,17 @@
+apiVersion: v2
+name: app
+version: 1.0.0
+description: A Helm chart for Kubernetes to deploy springboot application, zookeeper and kafka instances.
+dependencies:
+  - name: cp-kafka
+    version: 1.0.0
+    repository: file://./charts/cp-kafka
+    condition: cp-kafka.enabled
+  - name: cp-zookeeper
+    version: 1.0.0
+    repository: file://./charts/cp-zookeeper
+    condition: cp-zookeeper.enabled
+  - name: cp-schema-registry
+    version: 1.0.0
+    repository: file://./charts/cp-schema-registry
+    condition: cp-schema-registry.enabled

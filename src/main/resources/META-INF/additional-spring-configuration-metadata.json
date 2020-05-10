@@ -1,0 +1,39 @@
+{
+  "properties": [
+    {
+      "name": "app.kafka.bootstrap-servers",
+      "type": "java.lang.String",
+      "description": "bootstrap.servers kafka property."
+    },
+    {
+      "name": "app.kafka.topic.name",
+      "type": "java.lang.String",
+      "description": "name of the default kafka topic."
+    },
+    {
+      "name": "app.kafka.topic.customer-key",
+      "type": "java.lang.String",
+      "description": "key of the default kafka topic for Customer instance."
+    },
+    {
+      "name": "app.kafka.topic.partitions",
+      "type": "java.lang.Integer",
+      "description": "number of partitions in the default kafka topic."
+    },
+    {
+      "name": "app.kafka.topic.replicas",
+      "type": "java.lang.Integer",
+      "description": "number of replicas of the default kafka topic."
+    },
+    {
+      "name": "app.kafka.schema-registry-url",
+      "type": "java.lang.String",
+      "description": "schema.registry.url kafka property."
+    },
+    {
+      "name": "app.kafka.auto-register-schemas",
+      "type": "java.lang.Boolean",
+      "description": "auto.register.schemas kafka property."
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "type": "record",
+  "name": "Customer",
+  "namespace": "com.mera.shirmanov.avro",
+  "fields": [
+    { "name": "firstName", "type": "string" },
+    { "name": "lastName", "type": "string" },
+    { "name": "phoneNumber", "type": "string" }
+  ]
+}
