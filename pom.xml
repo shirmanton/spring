@@ -62,7 +62,7 @@
 							<goal>schema</goal>
 						</goals>
 						<configuration>
-							<sourceDirectory>helm/spring/schemas</sourceDirectory>
+							<sourceDirectory>src/main/resources/schemas</sourceDirectory>
 							<outputDirectory>${project.build.directory}/generated-sources</outputDirectory>
 							<stringType>String</stringType>
 						</configuration>
