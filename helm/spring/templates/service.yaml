@@ -3,17 +3,12 @@ kind: Service
 metadata:
   name: {{ include "spring.fullname" . }}
   labels:
-    app.kubernetes.io/name: {{ include "spring.name" . }}
-    helm.sh/chart: {{ include "spring.chart" . }}
-    app.kubernetes.io/instance: {{ .Release.Name }}
-    app.kubernetes.io/managed-by: {{ .Release.Service }}
+    app: {{ include "spring.fullname" . }}
 spec:
-  type: {{ .Values.service.type }}
+  type: NodePort
   ports:
-    - port: {{ .Values.service.port }}
-      targetPort: http
-      protocol: TCP
-      name: http
+    - port: {{ .Values.app.server.port }}
+      targetPort: {{ .Values.app.server.port }}
+      nodePort: {{ .Values.ports.nodePort }}
   selector:
-    app.kubernetes.io/name: {{ include "spring.name" . }}
-    app.kubernetes.io/instance: {{ .Release.Name }}
+    app: {{ include "spring.fullname" . }}

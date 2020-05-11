@@ -1,8 +1,23 @@
 replicaCount: 1
 image:
-  repository: "shirmanton/spring"
-  tag: "latest"
+  repository: shirmanton/spring
+  tag: latest
   pullPolicy: Always
-service:
-  type: NodePort
-  port: 8080
+nameOverride: spring-app
+fullnameOverride: spring-application
+ports:
+  nodePort: 32090
+app:
+  server:
+    port: 8080
+  kafka:
+    brokerHost: app-cp-kafka-headless
+    brokerPort: 9092
+    topic:
+      name: app-topic
+      partitions: 1
+      replicas: 1
+      customerKey: customer-key
+    schemaHost: app-cp-schema-registry-headless
+    schemaPort: 8081
+    autoRegisterSchemas: true
