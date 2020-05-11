@@ -1,98 +1,11 @@
-## ------------------------------------------------------
-## Zookeeper
-## ------------------------------------------------------
-cp-zookeeper:
-  enabled: true
-  servers: 1
-  image: confluentinc/cp-zookeeper
-  imageTag: 5.4.1
-  imagePullPolicy: IfNotPresent
-  podManagementPolicy: OrderedReady
-  updateStrategy: RollingUpdate
-  tickTime: 2000
-  syncLimit: 5
-  initLimit: 10
-  maxClientCnxns: 60
-  autoPurgeSnapRetainCount: 3
-  autoPurgePurgeInterval: 24
-  heapOptions: "-Xms512M -Xmx512M"
-  serverPort: 2888
-  leaderElectionPort: 3888
-  clientPort: 2181
-  persistence:
-    enabled: false
-    dataDirSize: 1Gi
-    dataLogDirSize: 1Gi
-  prometheus:
-    jmx:
-      enabled: false
-      image: solsson/kafka-prometheus-jmx-exporter@sha256
-      imageTag: 6f82e2b0464f50da8104acd7363fb9b995001ddff77d248379f8788e78946143
-      imagePullPolicy: IfNotPresent
-  podAnnotations:
-    sidecar.istio.io/inject: "false"
+nameOverride: kafka-app
+fullnameOverride: kafka-application
 
-## ------------------------------------------------------
-## Kafka
-## ------------------------------------------------------
 cp-kafka:
   brokers: 1
-  image: confluentinc/cp-enterprise-kafka
-  imageTag: 5.4.1
-  imagePullPolicy: IfNotPresent
-  podManagementPolicy: OrderedReady
-  updateStrategy: RollingUpdate
   configurationOverrides:
-    "confluent.support.metrics.enable": "false"
-    "auto.create.topics.enable": true
-    "zookeeper.session.timeout.ms": 18000
-    "replica.lag.time.max.ms": 30000
     "offsets.topic.replication.factor": "1"
-    "listener.security.protocol.map": |-
-      PLAINTEXT:PLAINTEXT,EXTERNAL:PLAINTEXT
-  persistence:
-    enabled: false
-    size: 1Gi
-    disksPerBroker: 1
-  heapOptions: "-Xms512M -Xmx512M"
-  prometheus:
-    jmx:
-      enabled: false
-      image: solsson/kafka-prometheus-jmx-exporter@sha256
-      imageTag: 6f82e2b0464f50da8104acd7363fb9b995001ddff77d248379f8788e78946143
-      imagePullPolicy: IfNotPresent
-  podAnnotations:
-    sidecar.istio.io/inject: "false"
-  serviceType: NodePort
-  nodeport:
-    enabled: true
-    servicePort: 19092
-    firstListenerPort: 32092
-  spec:
-    type: NodePort
-    ports:
-      - port: 19092
-        nodePort: 32092
-        name: http
+    "metric.reporters":
 
-## ------------------------------------------------------
-## Schema Registry
-## ------------------------------------------------------
-cp-schema-registry:
-  enabled: true
-  replicaCount: 1
-  image: confluentinc/cp-schema-registry
-  imageTag: 5.4.1
-  imagePullPolicy: IfNotPresent
-  servicePort: 8081
-  heapOptions: "-Xms512M -Xmx512M"
-  jmx:
-    port: 5555
-  prometheus:
-    jmx:
-      enabled: false
-      image: solsson/kafka-prometheus-jmx-exporter@sha256
-      imageTag: 6f82e2b0464f50da8104acd7363fb9b995001ddff77d248379f8788e78946143
-      imagePullPolicy: IfNotPresent
-      port: 5556
-  nodeport: 32093
+cp-zookeeper:
+  servers: 1

@@ -146,8 +146,7 @@ spec:
         - -exc
         - |
           export KAFKA_BROKER_ID=${HOSTNAME##*-} && \
-          {{- $advertisedListenersBasedOnFirstListenerPort := printf "PLAINTEXT://${POD_IP}:9092,EXTERNAL://localhost:$((%s + ${KAFKA_BROKER_ID}))" (.Values.nodeport.firstListenerPort | toString) }}
-          export KAFKA_ADVERTISED_LISTENERS={{ printf "%s" $advertisedListenersBasedOnFirstListenerPort }} && \
+          export KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://${POD_NAME}.{{ template "cp-kafka.fullname" . }}-headless.${POD_NAMESPACE}:9092{{ include "cp-kafka.configuration.advertised.listeners" . }} && \
           exec /etc/confluent/docker/run
         volumeMounts:
         {{- if .Values.persistence.enabled }}

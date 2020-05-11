@@ -8,12 +8,9 @@ metadata:
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}
 spec:
-  type: NodePort
   ports:
-    - name: http-sr
+    - name: schema-registry
       port: {{ .Values.servicePort }}
-      targetPort: {{ .Values.servicePort }}
-      nodePort: {{ .Values.nodeport }}
   selector:
     app: {{ template "cp-schema-registry.name" . }}
     release: {{ .Release.Name }}

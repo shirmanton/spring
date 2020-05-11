@@ -11,13 +11,13 @@ app:
   server:
     port: 8080
   kafka:
-    brokerHost: app-cp-kafka-headless
+    brokerHost: kafka-cp-kafka-headless
     brokerPort: 9092
     topic:
       name: app-topic
       partitions: 1
       replicas: 1
       customerKey: customer-key
-    schemaHost: app-cp-schema-registry-headless
+    schemaHost: kafka-cp-schema-registry
     schemaPort: 8081
     autoRegisterSchemas: true
