@@ -1,0 +1,28 @@
+apiVersion: skaffold/v2beta3
+kind: Config
+metadata:
+  name: spring
+
+build:
+  tagPolicy:
+    envTemplate:
+      template: "{{ .IMAGE_NAME }}:{{ .VERSION }}"
+  artifacts:
+    - image: shirmanton/spring
+      context: .
+      jibMaven:
+
+deploy:
+  helm:
+    releases:
+      - name: spring
+        chartPath: ./helm/spring
+        setValueTemplates:
+          image.repository: "{{ .IMAGE_NAME }}"
+          image.tag: "{{ .VERSION }}"
+        setValues:
+          image.pullPolicy: "Always"
+        recreatePods: true
+        packaged:
+          version: "{{ .VERSION }}"
+          appVersion: "{{ .VERSION }}"
