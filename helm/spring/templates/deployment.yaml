@@ -36,8 +36,10 @@ spec:
             - name: KAFKA_TOPIC_CUSTOMER_KEY
               value: "{{ .Values.app.kafka.topic.customerKey }}"
             - name: SCHEMA_REGISTRY_HOST
-              value: "{{ .Values.app.kafka.schemaHost }}"
+              value: "{{ .Values.app.kafka.schemaRegistryHost }}"
             - name: SCHEMA_REGISTRY_PORT
-              value: "{{ .Values.app.kafka.schemaPort }}"
+              value: "{{ .Values.app.kafka.schemaRegistryPort }}"
+            - name: SCHEMA_REGISTRY_SCHEMA
+              value: "{{ .Values.app.kafka.schemaRegistrySchema }}"
             - name: KAFKA_AUTO_REGISTER_SCHEMAS
               value: "{{ .Values.app.kafka.autoRegisterSchemas }}"

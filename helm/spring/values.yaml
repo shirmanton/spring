@@ -18,6 +18,7 @@ app:
       partitions: 1
       replicas: 1
       customerKey: customer-key
-    schemaHost: kafka-cp-schema-registry
-    schemaPort: 8081
+    schemaRegistrySchema: http
+    schemaRegistryHost: kafka-cp-schema-registry
+    schemaRegistryPort: 8081
     autoRegisterSchemas: true

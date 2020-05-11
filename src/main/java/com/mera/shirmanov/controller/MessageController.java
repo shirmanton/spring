@@ -29,11 +29,10 @@ public class MessageController {
 			@RequestParam(name = "phoneNumber") String phoneNumber) throws JsonProcessingException {
 
 		Customer customer = new Customer(firstName, lastName, phoneNumber);
-		String message = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(customer);
 		kafkaTemplate.send(
 				properties.getKafka().getTopic().getName(),
 				properties.getKafka().getTopic().getCustomerKey(),
 				customer);
-		return new ResponseEntity<>(message, HttpStatus.OK);
+		return new ResponseEntity<>(customer.toString(), HttpStatus.OK);
 	}
 }
